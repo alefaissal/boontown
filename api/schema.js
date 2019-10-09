@@ -22,6 +22,7 @@ module.exports = gql`
     id: ID!
     email:String!
     fullname: String!
+    password: String!
     bio: String
     items:[Item]
     borrowed:[Item]
@@ -54,6 +55,7 @@ module.exports = gql`
 
   type Query {
     user(id: ID!): User
+    users: [User]
     viewer: User
     items(filter: ID): [Item]
     tags: [Tag]

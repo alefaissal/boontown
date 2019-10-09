@@ -31,7 +31,7 @@ module.exports = postgres => {
       const findUserQuery = {
         text: `SELECT (fullname, password) 
               FROM users 
-              WHERE users.email = '$1'`,
+              WHERE users.email = $1`,
         values: [email],
       };
       try {
@@ -111,7 +111,7 @@ module.exports = postgres => {
       const items = await postgres.query({
        
         text: `SELECT (title) FROM items
-        WHERE items.ownerid = '$1';`,
+        WHERE items.ownerid = $1;`,
         values: [id],
       });
       return items.rows;
@@ -120,7 +120,7 @@ module.exports = postgres => {
       const items = await postgres.query({
       
         text: `SELECT (title) FROM items
-        WHERE items.borrowid = '$1'`,
+        WHERE items.borrowid = $1`,
         values: [id],
       });
       return items.rows;
@@ -129,18 +129,22 @@ module.exports = postgres => {
       const tags = await postgres.query(`SELECT * FROM tags`);
       return tags.rows;
     },
-    async getItems() {
+    async getAllItems() {
       const items = await postgres.query(`SELECT * FROM items`);
       return items.rows;
     },
+    async getUsers() {
+      const users = await postgres.query(`SELECT * FROM users`);
+      return users.rows;
+    },
     async getTagsForItem(id) {
       const tagsQuery = {
-        text: `SELECT (tags.title) FROM tags
+        text: `SELECT * FROM tags
         JOIN itemtags
         ON itemtags.tagid = tags.id
         JOIN items
         ON itemtags.itemid = items.id
-        WHERE itemtags.itemid = '$1'
+        WHERE itemtags.itemid = $1
          `, 
         values: [id],
       };
