@@ -49,8 +49,7 @@ module.exports = gql`
   input NewItemInput {
     title: String!
     description: String
-    tags: [AssignedTag]
-    _: Boolean
+    tags: [AssignedTag]!
   }
 
   type Query {
@@ -61,8 +60,9 @@ module.exports = gql`
   }
 
   type Mutation {
-    addItem(
-      item: NewIteminput!
-    ): Item
+    signup: Boolean
+    login: Boolean
+    logout: Boolean
+    addItem(item: NewItemInput!): Item
   }
 `;

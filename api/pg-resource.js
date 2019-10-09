@@ -9,7 +9,8 @@ module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
       const newUserInsert = {
-        text: "", // @TODO: Authentication - Server
+        text: `INSERT INTO users(fullname, email, password)
+               VALUES ($1, $2, $3)`,
         values: [fullname, email, password],
       };
       try {
@@ -28,7 +29,9 @@ module.exports = postgres => {
     },
     async getUserAndPasswordForVerification(email) {
       const findUserQuery = {
-        text: "", // @TODO: Authentication - Server
+        text: `SELECT (fullname, password) 
+              FROM users 
+              WHERE users.email = '$1'`,
         values: [email],
       };
       try {
@@ -61,7 +64,8 @@ module.exports = postgres => {
        */
 
       const findUserQuery = {
-        text: "", // @TODO: Basic queries
+        text: `SELECT * FROM user 
+                WHERE id = '$1'`, // @TODO: Basic queries
         values: [id],
       };
 
@@ -74,8 +78,14 @@ module.exports = postgres => {
        *  If the password is incorrect throw 'User or Password incorrect'
        */
 
-      const user = await postgres.query(findUserQuery);
-      return user;
+      try{
+        const user = await postgres.query(findUserQuery);
+          if (!user) throw "User was not found.";
+          return user.rows[0];
+      }catch (e) {
+        throw "User was not found.";
+      }
+
       // -------------------------------
     },
     async getItems(idToOmit) {
@@ -99,33 +109,39 @@ module.exports = postgres => {
     },
     async getItemsForUser(id) {
       const items = await postgres.query({
-        /**
-         *  @TODO:
-         *  Get all Items for user using their id
-         */
-        text: ``,
+       
+        text: `SELECT (title) FROM items
+        WHERE items.ownerid = '$1';`,
         values: [id],
       });
       return items.rows;
     },
     async getBorrowedItemsForUser(id) {
       const items = await postgres.query({
-        /**
-         *  @TODO:
-         *  Get all Items borrowed by user using their id
-         */
-        text: ``,
+      
+        text: `SELECT (title) FROM items
+        WHERE items.borrowid = '$1'`,
         values: [id],
       });
       return items.rows;
     },
     async getTags() {
-      const tags = await postgres.query(/* @TODO: Basic queries */);
+      const tags = await postgres.query(`SELECT * FROM tags`);
       return tags.rows;
+    },
+    async getItems() {
+      const items = await postgres.query(`SELECT * FROM items`);
+      return items.rows;
     },
     async getTagsForItem(id) {
       const tagsQuery = {
-        text: ``, // @TODO: Advanced query Hint: use INNER JOIN
+        text: `SELECT (tags.title) FROM tags
+        JOIN itemtags
+        ON itemtags.tagid = tags.id
+        JOIN items
+        ON itemtags.itemid = items.id
+        WHERE itemtags.itemid = '$1'
+         `, 
         values: [id],
       };
 

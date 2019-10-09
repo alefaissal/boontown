@@ -13,8 +13,8 @@ let pgResource = require('./api/pg-resource');
 pgResource = pgResource(postgres);
 
 
-const initApollo = require('./config/apollo')
-initApollo({ app, pgResource })
+const initApollo = require('./config/apollo');
+initApollo({ app, pgResource });
 
 
 postgres.on('error', (err, client) => {
