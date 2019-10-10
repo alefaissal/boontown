@@ -135,6 +135,7 @@ const mutationResolvers = app => ({
     return true;
   },
   async addItem(parent, args, context, info) {
+    
     /**
      *  @TODO: Destructuring
      *
@@ -147,12 +148,18 @@ const mutationResolvers = app => ({
      *  Again, you may look at the user resolver for an example of what
      *  destructuring should look like.
      */
-    const user = await jwt.decode(context.token, app.get("JWT_SECRET"));
+    // const user = await jwt.decode(context.token, app.get("JWT_SECRET"));
+    
+    // Delete this line of const user later
+    // const user ={fullname:"alex", email:"abc@abc.com", password:"34567"};
+    const user = 1;
     const newItem = await context.pgResource.saveNewItem({
       item: args.item,
       user,
     });
+    console.log(newItem);
     return newItem;
+    
   },
 });
 
