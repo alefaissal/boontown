@@ -54,11 +54,11 @@ module.exports = gql`
   }
 
   type Query {
+    viewer: User
     user(id: ID!): User
     users: [User]
-    viewer: User
-    items(filter: ID): [Item]
     tags: [Tag]
+    items(filter: ID): [Item]
   }
 
   type Mutation {

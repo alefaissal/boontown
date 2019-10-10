@@ -1,7 +1,7 @@
 const { ApolloError } = require("apollo-server");
 
 const queryResolvers = app => ({
-  viewer(parent, args, { user }, info) {
+  async viewer(parent, args, { user }, info) {
     /**
      * @TODO: Authentication - Server
      *
@@ -19,6 +19,7 @@ const queryResolvers = app => ({
   },
   async user(parent, { id }, { pgResource }, info) {
     try {
+      
       const user = await pgResource.getUserById(id);
       return user;
     } catch (e) {
@@ -27,16 +28,9 @@ const queryResolvers = app => ({
   },
   async users(parent, args, {pgResource}, info) {
     try{
+      
       const users = await pgResource.getUsers();
       return users;
-    }catch(e){
-      throw new ApolloError(e);
-    }
-  },
-  async items(parent, args, {pgResource}, info) {
-    try{
-      const items = await pgResource.getAllItems();
-      return items;
     }catch(e){
       throw new ApolloError(e);
     }
@@ -50,6 +44,16 @@ const queryResolvers = app => ({
       throw new ApolloError(e);
     }
   },
+  async items(parent, {filter}, {pgResource}, info){
+    try{
+      
+      const items = await pgResource.getItems(filter);
+      return items;
+
+    }catch(e){
+      throw "No items not related to this user";
+    }
+}
 });
 
 module.exports = queryResolvers;
