@@ -1,8 +1,9 @@
 function tagsQueryString(tags, itemid, result) {
   for (i = tags.length; i > 0; i--) {
     result += `($${i}, ${itemid}),`;
+    // console.log(result);
   }
-  return result.slice(0, -1) + ";";
+  return result.slice(0, -1);// + ";";
 }
 
 module.exports = postgres => {
@@ -46,20 +47,20 @@ module.exports = postgres => {
     async getUserById(id) {
       const findUserQuery = {
         text: `SELECT * FROM users u 
-                WHERE u.id = $1`, 
+                WHERE u.id = $1`,
         values: [id],
       };
-      try{
+      try {
         const user = await postgres.query(findUserQuery);
-          if (!user) throw "User was not found.";
-          return user.rows[0];
-      }catch (e) {
+        if (!user) throw "User was not found.";
+        return user.rows[0];
+      } catch (e) {
         throw "User was not found.";
       }
     },
     //done
     async getItems(idToOmit) {
-      
+
       const itemsBYOmitedUser = {
         text: `SELECT * FROM items
         WHERE items.itemowner IS NOT NULL 
@@ -67,11 +68,11 @@ module.exports = postgres => {
         values: idToOmit ? [idToOmit] : [],
       };
 
-      try{
+      try {
         const items = await postgres.query(itemsBYOmitedUser);
         return items.rows;
-      }catch (e){
-        
+      } catch (e) {
+
         throw "Items not found";
       }
     },
@@ -82,13 +83,13 @@ module.exports = postgres => {
         WHERE items.itemowner = $1;`,
         values: [id],
       };
-      try{
+      try {
         const items = await postgres.query(itemsPerUser);
         return items.rows;
-      } catch (e){
+      } catch (e) {
         throw "Items not found";
       }
-      
+
     },
     //done
     async getBorrowedItemsForUser(id) {
@@ -99,35 +100,35 @@ module.exports = postgres => {
         WHERE users.id = $1`,
         values: [id],
       };
-      try{
+      try {
         const items = await postgres.query(ItemsBorrowedByUser);
         return items.rows[0];
-      } catch (e){
+      } catch (e) {
         throw "Items not found";
       }
-      
+
     },
     //done
     async getTags() {
       const Alltags = `SELECT * FROM tags`;
 
-      try{
+      try {
         const tags = await postgres.query(Alltags);
-       return tags.rows; 
-      } catch (e){
+        return tags.rows;
+      } catch (e) {
         throw "Tags not found";
       }
     },
     //done
     async getUsers() {
       const AllUsers = `SELECT * FROM users`;
-      try{
+      try {
         const users = await postgres.query(AllUsers);
         return users.rows;
-      }catch(e){
+      } catch (e) {
         throw "No users found";
       }
-      
+
     },
     //done
     async getTagsForItem(id) {
@@ -138,16 +139,16 @@ module.exports = postgres => {
         JOIN items
         ON itemtags.itemid = items.id
         WHERE items.id = $1
-         `, 
+         `,
         values: [id],
       };
-      try{
+      try {
         const tags = await postgres.query(tagsQuery);
         return tags.rows;
-      }catch(e){
+      } catch (e) {
         throw "No tags for this item";
       }
-      
+
     },
     //done
     async getUserForItem(id) {
@@ -156,17 +157,16 @@ module.exports = postgres => {
         INNER JOIN items
         ON items.itemowner = users.id
         WHERE users.id = $1
-         `, 
+         `,
         values: [id],
       };
-      try{
+      try {
         const users = await postgres.query(usersQuery);
-        // console.log(users.rows);
         return users.rows[0];
-      }catch(e){
+      } catch (e) {
         throw "No tags for this item";
       }
-      
+
     },
     async saveNewItem({ item, user }) {
 
@@ -195,7 +195,7 @@ module.exports = postgres => {
          * - Read about transactions here: https://node-postgres.com/features/transactions
          */
         postgres.connect((err, client, done) => {
-          
+
           try {
             // Begin postgres transaction
             client.query("BEGIN", async err => {
@@ -205,53 +205,65 @@ module.exports = postgres => {
               // @TODO
               // -------------------------------
               const itemQuery = {
-                text:`INSERT INTO items(title, description, itemowner) 
-                      VALUES ($1, $2, $3) RETURNING id`,
-                values:[title, description, user]
+                text: `INSERT INTO items(title, description, itemowner) 
+                      VALUES ($1, $2, $3) RETURNING id, title, description`,
+                values: [title, description, user]
               };
 
 
               // Insert new Item
               // @TODO
               // -------------------------------
- 
+
               const newItem = await postgres.query(itemQuery);
               const itemid = newItem.rows[0].id;
-              console.log(itemid);
-              
-              // return newItem;
-              
+              // console.log(newItem);
+
+
               // Generate tag relationships query (use the'tagsQueryString' helper function provided)
               // @TODO
               // -------------------------------
+
               
+              // console.log(item.tags[0].id);
+              // console.log(itemid);
               const tagsForNewItem = tagsQueryString(item.tags, itemid, '');
-                console.log(tagsForNewItem);
-                // console.log(item.tags);
-                // console.log(item.id);
+              console.log(tagsForNewItem);///////////////////
 
 
               // Insert tags
-              // @TODO
-              // -------------------------------
-
-
-              // const itemTagsQuery = {
-              //   text:`INSERT INTO itemtags(itemid, tagid) VALUES ($1, $2);`,
-              //   values:[item.id, item.tags.id]
-              // };
- 
-              // const newItemTags = await postgres.query(itemTagsQuery);
+              // @TODO still need to insert tags ========////////============
 
 
 
 
 
 
+              const tagsIdList = ()=>{
+                let values = [];
+                for (let i = 0; i < item.tags.length; i++) {
+                  values[i] = item.tags[i].id;
+                }
+                // console.log(values);     
+                return values; 
+              };
+              console.log(tagsIdList());/////////////////
 
 
+              const itemTagsQuery = {
+                text: `INSERT INTO itemtags(tagid, itemid) VALUES (${tagsForNewItem});`,
+                values:tagsIdList()
+              };
+                console.log(itemTagsQuery);///////////////
 
-
+              // try {
+              //   let itemTagsAdded = await postgres.query(itemTagsQuery);
+              //   return itemTagsAdded.rows;
+              // } catch (e) {
+              //   throw e;
+              // }
+              
+                
               // Commit the entire transaction!
               client.query("COMMIT", err => {
                 if (err) {
