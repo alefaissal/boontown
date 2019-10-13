@@ -39,5 +39,14 @@ yarn run build
 ```
 
 ## Technology involved
-#### React
+* Git
+* PostgreSQL
+* Apollo Server
+* GraphQL
+
+## Personal learnings
+How to work with Database, the relationship between client, server and Database.
+Understand better how this relation bellow works.
+
+<img src="./images/graphql diagram.png" alt="graphql diagram" width="400"/>
 
