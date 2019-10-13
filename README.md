@@ -40,6 +40,8 @@ yarn run build
 
 ## Technology involved
 * Git
+* Node
+* Javascript
 * PostgreSQL
 * Apollo Server
 * GraphQL
