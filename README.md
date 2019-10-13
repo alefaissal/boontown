@@ -37,3 +37,7 @@ yarn start
 ```bash
 yarn run build
 ```
+
+## Technology involved
+#### React
+
