@@ -1,6 +1,6 @@
 const { ApolloError } = require("apollo-server");
 
-module.exports = {
+module.exports = { 
   User: {
     async items({id}, args, {pgResource}, info) {
      try{ const items = await pgResource.getItemsForUser(id);

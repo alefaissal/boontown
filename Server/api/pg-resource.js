@@ -1,7 +1,6 @@
 function tagsQueryString(tags, itemid, result) {
   for (i = tags.length; i > 0; i--) {
     result += `($${i}, ${itemid}),`;
-    // console.log(result);
   }
   return result.slice(0, -1);// + ";";
 }
@@ -169,7 +168,6 @@ module.exports = postgres => {
 
     },
     async saveNewItem({ item, user }) {
-
       /**
        *  @TODO: Adding a New Item
        *
@@ -189,6 +187,7 @@ module.exports = postgres => {
        */
 
       return new Promise((resolve, reject) => {
+
         /**
          * Begin transaction by opening a long-lived connection
          * to a client from the client pool.
@@ -201,69 +200,38 @@ module.exports = postgres => {
             client.query("BEGIN", async err => {
               const { title, description, tags } = item;
 
-              // Generate new Item query
-              // @TODO
-              // -------------------------------
+              // Generate new Item query - working
               const itemQuery = {
                 text: `INSERT INTO items(title, description, itemowner) 
                       VALUES ($1, $2, $3) RETURNING id, title, description`,
                 values: [title, description, user]
               };
 
-
-              // Insert new Item
-              // @TODO
-              // -------------------------------
-
+              // Insert new Item - working
               const newItem = await postgres.query(itemQuery);
               const itemid = newItem.rows[0].id;
-              // console.log(newItem);
+
+              //Add tags and itemtags relation
+              const tagQueryList = [];
+              const itemTagsQuery = [];
+              for(let i = 0; i < tags.length; i++) {
+                //Add tag to tags table
+                tagQueryList[i] = {
+                  text: `INSERT INTO tags(id, title) 
+                            VALUES ($1, $2)`,
+                  values: [tags[i].id, tags[i].title]
+                };
+                let newTag = await postgres.query(tagQueryList[i]);
+                //Add realtion in itemtags table
+                itemTagsQuery[i] = {
+                      text: `INSERT INTO itemtags(tagid, itemid) 
+                             VALUES ($1,${itemid});`,
+                             values: [tags[i].id]
+                    };
+                    let newItemTag = await postgres.query(itemTagsQuery[i]);
+              }
 
 
-              // Generate tag relationships query (use the'tagsQueryString' helper function provided)
-              // @TODO
-              // -------------------------------
-
-              
-              // console.log(item.tags[0].id);
-              // console.log(itemid);
-              const tagsForNewItem = tagsQueryString(item.tags, itemid, '');
-              console.log(tagsForNewItem);///////////////////
-
-
-              // Insert tags
-              // @TODO still need to insert tags ========////////============
-
-
-
-
-
-
-              const tagsIdList = ()=>{
-                let values = [];
-                for (let i = 0; i < item.tags.length; i++) {
-                  values[i] = item.tags[i].id;
-                }
-                // console.log(values);     
-                return values; 
-              };
-              console.log(tagsIdList());/////////////////
-
-
-              const itemTagsQuery = {
-                text: `INSERT INTO itemtags(tagid, itemid) VALUES (${tagsForNewItem});`,
-                values:tagsIdList()
-              };
-                console.log(itemTagsQuery);///////////////
-
-              // try {
-              //   let itemTagsAdded = await postgres.query(itemTagsQuery);
-              //   return itemTagsAdded.rows;
-              // } catch (e) {
-              //   throw e;
-              // }
-              
-                
               // Commit the entire transaction!
               client.query("COMMIT", err => {
                 if (err) {

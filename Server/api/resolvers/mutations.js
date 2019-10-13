@@ -3,7 +3,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const bcrypt = require("bcryptjs");
 
 function setCookie({ tokenName, token, res }) {
-  /**
+  /** 
    *  @TODO: Authentication - Server
    *
    *  This helper function is responsible for attaching a cookie to the HTTP
