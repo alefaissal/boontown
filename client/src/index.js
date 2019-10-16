@@ -3,22 +3,23 @@ import ReactDOM from 'react-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // @TODO: Uncomment each module as needed in your client app
-import { ApolloProvider } from 'react-apollo'
-// import { BrowserRouter } from 'react-router-dom'
+import { ApolloProvider } from 'react-apollo';
+import { BrowserRouter } from 'react-router-dom';
 // import { Provider as ReduxProvider } from 'react-redux'
-import client from './apollo'
+import client from './apollo';
 // -------------------------------
 
 import registerServiceWorker from './registerServiceWorker';
 import theme from './theme';
 
+import AppRoutes from './routes';
 
 /**
  * @TODO: Add Routing
  *
  * Uncomment the following line when your routes are configured
  *
- * import AppRoutes from './routes'
+ * 
  *
  * Below in your <App />, nest your <AppRoutes /> inside of <BrowserRouter />
  * component to enable routing in your client app.
@@ -54,14 +55,16 @@ import Items from './pages/Items';
 import './index.css';
 
 const App = () => {
-  return (
-    <ApolloProvider client={client}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <Items />
-      </MuiThemeProvider>
-    </ApolloProvider>
-  );
+	return (
+		<ApolloProvider client={client}>
+			<MuiThemeProvider theme={theme}>
+				<CssBaseline />
+				<BrowserRouter>
+					<AppRoutes />
+				</BrowserRouter>
+			</MuiThemeProvider>
+		</ApolloProvider>
+	);
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
