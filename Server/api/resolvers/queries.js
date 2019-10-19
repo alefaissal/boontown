@@ -46,7 +46,6 @@ const queryResolvers = app => ({
   },
   async items(parent, {filter}, {pgResource}, info){
     try{
-      
       const items = await pgResource.getItems(filter);
       return items;
 

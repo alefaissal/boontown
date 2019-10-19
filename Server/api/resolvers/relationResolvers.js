@@ -22,7 +22,9 @@ module.exports = {
   Item: {
     async itemowner(item, args, {pgResource}, info) {
       try{
-        const owner = await pgResource.getUserForItem(item.itemowner);
+        const owner = await pgResource.getUserById(item.itemowner);
+
+				console.log(owner)
         return owner;
     
       }catch (e){
@@ -38,7 +40,6 @@ module.exports = {
       }
     },
     async borrower(item, args, {pgResource}, info) {
-      console.log(item);
       try{
         const userBorrower = await pgResource.getBorrowedItemsForUser(item.borrower);
         return userBorrower;

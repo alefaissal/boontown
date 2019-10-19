@@ -157,7 +157,6 @@ const mutationResolvers = app => ({
       item: args.item,
       user,
     });
-    // console.log(newItem);
     return newItem;
     
   },

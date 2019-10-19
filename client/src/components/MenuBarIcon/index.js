@@ -3,19 +3,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
-const options = [
-	'YOUR PROFILE',
-	'LOGOUT'
-];
+import Icon from '@material-ui/core/Icon';
 
 const ITEM_HEIGHT = 48;
 
 export default function MenuBarIcon () {
-	const [
-		anchorEl,
-		setAnchorEl
-	] = React.useState(null);
+	const [ anchorEl, setAnchorEl ] = React.useState(null);
 	const open = Boolean(anchorEl);
 
 	const handleClick = event => {
@@ -44,11 +37,12 @@ export default function MenuBarIcon () {
 					}
 				}}
 			>
-				{options.map(option => (
-					<MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-						{option}
-					</MenuItem>
-				))}
+				<MenuItem onClick={handleClose}>
+					<Icon>fingerprint</Icon> YOUR PROFILE
+				</MenuItem>
+				<MenuItem onClick={handleClose}>
+					<Icon>power_settings_new</Icon> LOGOUT
+				</MenuItem>
 			</Menu>
 		</div>
 	);

@@ -1,6 +1,3 @@
-import itemsGrid from './itemsGrid';
+import ItemsGrid from './ItemsGrid';
 
-
-
-
-export default itemsGrid;
+export default ItemsGrid;

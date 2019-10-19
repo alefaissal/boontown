@@ -11,16 +11,18 @@ import MenuBarIcon from '../MenuBarIcon';
 
 const MenuBar = ({ classes }) => {
 	return (
-		<AppBar position="static">
-			<Toolbar>
+		<AppBar className={classes.navMenuContainer} position="static">
+			<Toolbar className={classes.toolbarMain}>
 				<IconButton edge="start" color="inherit" aria-label="menu">
-					<img src={boomtown} />
+					<img className={classes.iconImage} src={boomtown} />
 				</IconButton>
-				<Fab variant="extended" aria-label="delete" className={classes.fab}>
-					<Icon>add_circle</Icon>
-					SHARE SOMETHING
-				</Fab>
-				<MenuBarIcon />
+				<div className={classes.navButtonAndMenu}>
+					<Fab variant="extended" aria-label="delete" className={(classes.fab, classes.shareButton)}>
+						<Icon className={classes.iconPlusShare}>add_circle</Icon>
+						SHARE SOMETHING
+					</Fab>
+					<MenuBarIcon />
+				</div>
 			</Toolbar>
 		</AppBar>
 	);
