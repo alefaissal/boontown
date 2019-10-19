@@ -9,7 +9,7 @@ const styles = theme => ({
 		flexGrow : 1
 	},
 	iconImage        : {
-		width : '4.5vh'
+		width : '4.2vh'
 	},
 	navMenuContainer : {
 		width : '100vw'

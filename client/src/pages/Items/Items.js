@@ -4,13 +4,11 @@ import styles from './styles';
 import ItemsContainer from './ItemsContainer';
 import ItemsGrid from '../../components/ItemsGrid/index';
 
-
-const Items = ({classes, items}) => {
+const Items = ({ classes, items }) => {
 	return (
-		<div>
+		<div className={classes.itemsPageBody}>
 			<p>
-				This is the items page located at <code>/items</code>.
-				<ItemsGrid items={items}/>
+				<ItemsGrid items={items} />
 			</p>
 		</div>
 	);

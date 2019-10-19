@@ -1,8 +1,59 @@
 const styles = theme => ({
-	// root    : {
-	// 	flexGrow : 1
-	// },
-	
+	card               : {
+		width          : '30vw',
+		height         : '60vh',
+		display        : 'flex',
+		justifyContent : 'space-between',
+		flexFlow       : 'column wrap'
+	},
+	media              : {
+		maxWidth           : '100%',
+		height             : 300,
+		backgroundSize     : 'cover',
+		// backgroundSize     : 'contain', //or change this for cover above
+		backgroundPosition : 'top'
+		// background         : 'lightblue',
+		// backgroundRepeat   : 'no-repeat'
+	},
+
+	cardContent        : {
+		displa : 'flex'
+	},
+	itemowner          : {
+		height : '10vh'
+	},
+	itemownerDetails   : {
+		display        : 'flex',
+		justifyContent : 'space-between',
+		heigh          : '100%'
+	},
+	itemownerAvatar    : {
+		height : 60,
+		width  : 60
+	},
+	itemownerAvatarImg : {
+		height       : 60,
+		width        : 60,
+		borderRadius : 50
+	},
+	iteownerFullName   : {
+		width         : '85%',
+		textAlign     : 'left',
+		paddingTop    : 10,
+		paddingBottom : 10,
+		color         : 'black'
+	},
+	datePosted         : {
+		color : 'grey'
+	},
+	itemsDetails       : {},
+	itemDescription    : {
+		color : 'black'
+	},
+	button             : {
+		marginLeft   : 10,
+		marginBottom : 10
+	}
 });
 
 export default styles;
