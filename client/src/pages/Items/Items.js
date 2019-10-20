@@ -1,8 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import ItemsContainer from './ItemsContainer';
-import ItemsGrid from '../../components/ItemsGrid/index';
+// import ItemsContainer from './ItemsContainer';
+import ItemsGrid from '../../components/ItemsGrid';
 
 const Items = ({ classes, items }) => {
 	return (

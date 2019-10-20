@@ -48,8 +48,8 @@ import AppRoutes from './routes';
  */
 
 // @TODO: Remove this import once you have your router working below
-import Home from './pages/Home';
-import Items from './pages/Items';
+// import Home from './pages/Home';
+// import Items from './pages/Items';
 // -------------------------------
 
 import './index.css';

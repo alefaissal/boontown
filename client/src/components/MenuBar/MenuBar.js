@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,7 +14,7 @@ const MenuBar = ({ classes }) => {
 		<AppBar className={classes.navMenuContainer} position="static">
 			<Toolbar className={classes.toolbarMain}>
 				<IconButton edge="start" color="inherit" aria-label="menu">
-					<img className={classes.iconImage} src={boomtown} />
+					<img className={classes.iconImage} src={boomtown} alt="icon" />
 				</IconButton>
 				<div className={classes.navButtonAndMenu}>
 					<Fab variant="extended" aria-label="delete" className={(classes.fab, classes.shareButton)}>

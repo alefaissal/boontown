@@ -1,8 +1,7 @@
 import styles from './styles';
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import ItemCard from '../ItemCard/ItemCard';
 
 const ItemsGrid = ({ classes, items }) => {
