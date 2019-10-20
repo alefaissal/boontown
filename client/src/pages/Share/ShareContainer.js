@@ -13,7 +13,6 @@ class ShareContainer extends Component {
 					if (loading) return 'Loading';
 					if (error) return `Error: ${error}`;
 					if (data) {
-						console.log(data.tags);
 						return <Share tags={data.tags} />;
 					}
 				}}

@@ -24,7 +24,7 @@ const Share = ({ classes, tags }) => {
 				<ShareItemPreview />
 			</div>
 
-			<div>
+			<div className={classes.formContainer}>
 				<ShareItemForm tags={tags} />
 			</div>
 		</div>

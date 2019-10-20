@@ -26,7 +26,8 @@ class ShareItemForm extends Component {
 		// console.log(classes);
 		super(classes);
 		this.state = {
-			checkedB : false
+			checkedB : false,
+			tags     : []
 		};
 		this.classes = classes.classes;
 		this.tags = classes.tags;
@@ -74,20 +75,7 @@ class ShareItemForm extends Component {
 
 								<div>
 									{this.tags.map(tag => {
-										// let title = tag.title;
-										// console.log(title);
 										return (
-											// <p>{title}</p>
-
-											// <Checkbox
-											// 	key={tag.id}
-											// 	className={this.classes.root}
-											// 	disableRipple
-											// 	color="default"
-											// 	checkedIcon={<span className={clsx(this.classes.icon, this.classes.checkedIcon)} />}
-											// 	icon={<span className={this.classes.icon} />}
-											// 	text={title}
-											// />
 											<FormControlLabel
 												control={
 													<Checkbox

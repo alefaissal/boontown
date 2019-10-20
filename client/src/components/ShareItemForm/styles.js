@@ -1,6 +1,6 @@
 const styles = theme => ({
 	shareFormContainer : {
-		width : '25vw'
+		width : '30vw'
 	},
 	formContainer      : {
 		display  : 'flex',
@@ -12,8 +12,8 @@ const styles = theme => ({
 		width    : '100%'
 	},
 	textField          : {
-		marginLeft  : theme.spacing(1),
-		marginRight : theme.spacing(1),
+		marginLeft  : theme.spacing(0),
+		marginRight : theme.spacing(0),
 		width       : '100%'
 	},
 
@@ -30,9 +30,13 @@ const styles = theme => ({
 		display : 'none'
 	},
 	root               : {
-		'&:hover' : {
-			backgroundColor : 'transparent'
+		color       : 'green',
+		'&$checked' : {
+			color : 'green'
 		}
+	},
+	checked            : {
+		color : 'blue'
 	},
 	icon               : {
 		borderRadius               : 3,
