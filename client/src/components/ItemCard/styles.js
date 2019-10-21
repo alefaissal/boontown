@@ -1,7 +1,7 @@
 const styles = theme => ({
 	card               : {
 		width          : '30vw',
-		height         : '60vh',
+		height         : '65vh',
 		display        : 'flex',
 		justifyContent : 'space-between',
 		flexFlow       : 'column wrap'
@@ -14,10 +14,6 @@ const styles = theme => ({
 		backgroundPosition : 'top'
 		// background         : 'lightblue',
 		// backgroundRepeat   : 'no-repeat'
-	},
-
-	cardContent        : {
-		displa : 'flex'
 	},
 	itemowner          : {
 		height : '10vh'

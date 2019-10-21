@@ -1,6 +1,6 @@
 const styles = theme => ({
 	button : {
-		display : 'none'
+		// display : 'none'
 	}
 });
 
