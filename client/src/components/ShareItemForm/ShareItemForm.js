@@ -11,7 +11,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 let error = null;
 
 const onSubmit = values => {
-	// let { name, description } = values;
+	let { name, description } = values;
+	console.log({ name, description });
 };
 
 const validate = values => {
@@ -23,11 +24,10 @@ const validate = values => {
 
 class ShareItemForm extends Component {
 	constructor (classes) {
-		// console.log(classes);
 		super(classes);
 		this.state = {
-			checkedB : false,
-			tags     : []
+			checkedTags : [],
+			tags        : []
 		};
 		this.classes = classes.classes;
 		this.tags = classes.tags;
@@ -36,8 +36,26 @@ class ShareItemForm extends Component {
 	}
 
 	render () {
-		console.log(this.classes);
-		console.log(this.tags);
+		const handleChange = name => event => {
+			this.setState({ ...this.state, [name]: event.target.checked });
+		};
+		const checkedTags = tags => {
+			let list = [];
+			tags.forEach(tag => {
+				list.push({ id: tag.id, value: false });
+			});
+			return list;
+		};
+
+		const list = checkedTags(this.tags);
+
+		//TODO undesrtand why it get into an infinite loop
+		// this.setState({
+		// 	checkedTags : list
+		// });
+
+		console.log(checkedTags(this.tags));
+
 		return (
 			<Form
 				onSubmit={onSubmit}
@@ -47,7 +65,7 @@ class ShareItemForm extends Component {
 						<h1 className={this.classes.formTitle}>Share. Borrow. Prosper.</h1>
 						<div className={this.classes.formContainer}>
 							<Field
-								name="Name your item"
+								name="name"
 								render={({ input, meta }) => (
 									<TextField
 										id="standard-with-placeholder"
@@ -55,11 +73,13 @@ class ShareItemForm extends Component {
 										placeholder=""
 										className={this.classes.textField}
 										margin="normal"
+										{...input}
+										value={input.value}
 									/>
 								)}
 							/>
 							<Field
-								name="Name your item"
+								name="description"
 								render={({ input, meta }) => (
 									<TextField
 										id="standard-with-placeholder"
@@ -67,6 +87,8 @@ class ShareItemForm extends Component {
 										placeholder=""
 										className={this.classes.textField}
 										margin="normal"
+										{...input}
+										value={input.value}
 									/>
 								)}
 							/>
@@ -92,7 +114,7 @@ class ShareItemForm extends Component {
 									})}
 								</div>
 							</div>
-							<Button variant="contained" color="secondary" disabled className={this.classes.button}>
+							<Button type="submit" variant="contained" color="secondary" className={this.classes.button}>
 								SHARE
 							</Button>
 						</div>
