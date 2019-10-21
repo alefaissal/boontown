@@ -46,14 +46,20 @@ export const ALL_ITEMS_QUERY = gql`
   ${ItemFields}
 `;
 
-
-
 export const ALL_USER_ITEMS_QUERY = gql`
   query user($id: ID!) {
+	  user(id:$id){
       bio
       email
-      fullname
-      ...ItemFields
+	  fullname
+	  items{
+	  ...ItemFields
+	  }
+	  borrowed{
+		  id
+		  
+	  }
+	  }
   }
   ${ItemFields}
 `;

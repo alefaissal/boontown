@@ -71,6 +71,5 @@ Where all your queries and mutations can be tested before using in your react ap
 
 ## Author
 
-Alex Faissal
-
+Alex Faissal 
 [My LinkedIn](https://www.linkedin.com/in/alex-faissal/)

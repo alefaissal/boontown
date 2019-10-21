@@ -1,6 +1,7 @@
 const styles = theme => ({
 	itemsPageBody : {
-		background : 'black'
+		background : 'black',
+		minHeight  : '100vh'
 	}
 });
 

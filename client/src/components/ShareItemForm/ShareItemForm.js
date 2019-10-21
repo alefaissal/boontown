@@ -98,18 +98,20 @@ class ShareItemForm extends Component {
 								<div>
 									{this.tags.map(tag => {
 										return (
-											<FormControlLabel
-												control={
-													<Checkbox
-														key={tag.id}
-														checked={this.state.checkedB}
-														onChange={''}
-														value="checkedB"
-														color="primary"
-													/>
-												}
-												label={tag.title}
-											/>
+											<React.Fragment>
+												<FormControlLabel
+													control={
+														<Checkbox
+															key={tag.id}
+															checked={this.state.checkedB}
+															onChange={''}
+															value="checkedB"
+															color="primary"
+														/>
+													}
+													label={tag.title}
+												/>
+											</React.Fragment>
 										);
 									})}
 								</div>

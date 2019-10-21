@@ -4,11 +4,15 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Icon from '@material-ui/core/Icon';
+import { NavLink } from 'react-router-dom';
 
 const ITEM_HEIGHT = 48;
 
 export default function MenuBarIcon () {
-	const [ anchorEl, setAnchorEl ] = React.useState(null);
+	const [
+		anchorEl,
+		setAnchorEl
+	] = React.useState(null);
 	const open = Boolean(anchorEl);
 
 	const handleClick = event => {
@@ -37,12 +41,16 @@ export default function MenuBarIcon () {
 					}
 				}}
 			>
-				<MenuItem onClick={handleClose}>
-					<Icon>fingerprint</Icon> YOUR PROFILE
-				</MenuItem>
-				<MenuItem onClick={handleClose}>
-					<Icon>power_settings_new</Icon> LOGOUT
-				</MenuItem>
+				<NavLink to="/profile">
+					<MenuItem onClick={handleClose}>
+						<Icon>fingerprint</Icon> YOUR PROFILE
+					</MenuItem>
+				</NavLink>
+				<NavLink to="/logout">
+					<MenuItem onClick={handleClose}>
+						<Icon>power_settings_new</Icon> LOGOUT
+					</MenuItem>
+				</NavLink>
 			</Menu>
 		</div>
 	);

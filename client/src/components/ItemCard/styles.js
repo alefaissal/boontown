@@ -20,8 +20,7 @@ const styles = theme => ({
 	},
 	itemownerDetails   : {
 		display        : 'flex',
-		justifyContent : 'space-between',
-		heigh          : '100%'
+		justifyContent : 'space-between'
 	},
 	itemownerAvatar    : {
 		height : 60,
