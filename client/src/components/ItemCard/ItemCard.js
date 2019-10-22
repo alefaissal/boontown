@@ -10,6 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { NavLink } from 'react-router-dom';
+import Gravatar from 'react-gravatar';
 
 const ItemCard = ({ classes, item }) => {
 	return (
@@ -20,11 +21,7 @@ const ItemCard = ({ classes, item }) => {
 					<Typography className={classes.itemowner} variant="body2" color="textSecondary" component="p">
 						<NavLink className={classes.itemownerDetails}>
 							<div className={classes.itemownerAvatar}>
-								<CardMedia
-									className={classes.itemownerAvatarImg}
-									image="https://icon-library.net/images/atari-icon/atari-icon-2.jpg"
-									title="Avatar image"
-								/>
+								<Gravatar className={classes.itemownerAvatarImg} email={item.itemowner.email} />
 							</div>
 
 							<div className={classes.iteownerFullName}>
@@ -60,7 +57,8 @@ ItemCard.defaultProps = {
 	item : {
 		imageurl    : 'https://pixelsoftek.in/wp-content/uploads/2018/09/demo-image.jpg',
 		itemowner   : {
-			fullname : 'Name here'
+			fullname : 'Name here',
+			email    : 'test@test.com'
 		},
 		date        : 'date here',
 		title       : 'Item Title',

@@ -19,15 +19,15 @@ const MenuBar = ({ classes }) => {
 						<img className={classes.iconImage} src={boomtown} alt="icon" />
 					</IconButton>
 				</NavLink>
-				<NavLink to="/share">
-					<div className={classes.navButtonAndMenu}>
+				<div className={classes.navButtonAndMenu}>
+					<NavLink to="/share">
 						<Fab variant="extended" aria-label="delete" className={(classes.fab, classes.shareButton)}>
 							<Icon className={classes.iconPlusShare}>add_circle</Icon>
 							SHARE SOMETHING
 						</Fab>
-						<MenuBarIcon />
-					</div>
-				</NavLink>
+					</NavLink>
+					<MenuBarIcon />
+				</div>
 			</Toolbar>
 		</AppBar>
 	);

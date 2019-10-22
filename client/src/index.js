@@ -7,6 +7,7 @@ import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter } from 'react-router-dom';
 // import { Provider as ReduxProvider } from 'react-redux'
 import client from './apollo';
+import ItemPreviewProvider from './context/ItemPreviewProvider';
 // -------------------------------
 
 import registerServiceWorker from './registerServiceWorker';
@@ -59,9 +60,11 @@ const App = () => {
 		<ApolloProvider client={client}>
 			<MuiThemeProvider theme={theme}>
 				<CssBaseline />
-				<BrowserRouter>
-					<AppRoutes />
-				</BrowserRouter>
+				<ItemPreviewProvider>
+					<BrowserRouter>
+						<AppRoutes />
+					</BrowserRouter>
+				</ItemPreviewProvider>
 			</MuiThemeProvider>
 		</ApolloProvider>
 	);

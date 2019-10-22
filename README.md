@@ -3,6 +3,11 @@ Boomtown is a Web App to share and borrow itens online.
 Each user can have a list of items that can be borrowed by other users, as can borrow items from another users.
 
 ---
+## Screenshot from Playground
+<img src="./client/images/Playground.png" alt="graphql diagram" width="400"/>
+---
+
+## Instalation and run instruction
 
 ## Server
 
@@ -44,11 +49,10 @@ yarn run build
 
 ---
 ## Technology involved
-* Git/Github
 * Node
 * Express
-* Javascript/JSX
-* React/ React Router
+* React
+* React Router
 * Material-UI
 * PostgreSQL
 * Apollo Server
@@ -66,10 +70,8 @@ Understand better how this relation bellow works.
 ## Playground
 Where all your queries and mutations can be tested before using in your react app, in the server folder.
 
-## Screenshot from Playground
-<img src="./client/images/Playground.png" alt="graphql diagram" width="400"/>
 
 ## Author
 
 Alex Faissal 
-[My LinkedIn](https://www.linkedin.com/in/alex-faissal/)
+[LinkedIn](https://www.linkedin.com/in/alex-faissal/)

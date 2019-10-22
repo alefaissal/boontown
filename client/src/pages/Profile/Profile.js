@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import ItemsGrid from '../../components/ItemsGrid';
+import Gravatar from 'react-gravatar';
 
 const Profile = ({ classes, user }) => {
 	console.log(user);
@@ -10,7 +11,7 @@ const Profile = ({ classes, user }) => {
 			<div className={classes.marginTop} />
 			<div className={classes.useBox}>
 				<div className={classes.userNameContainer}>
-					<img className={classes.userImage} src="https://icon-library.net/images/atari-icon/atari-icon-2.jpg" />
+					<Gravatar className={classes.userImage} email={user.email} />
 					<p className={classes.userFullname}>{user.fullname}</p>
 				</div>
 				<div className={classes.itemsStatus}>
