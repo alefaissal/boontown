@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import boomtown from '../../images/boomtown.svg';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
-import MenuBarIcon from '../MenuBarIcon';
+import MenuBarIcon from '../MenuBarIcon/index';
 import { NavLink } from 'react-router-dom';
 
 const MenuBar = ({ classes }) => {

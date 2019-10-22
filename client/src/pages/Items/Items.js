@@ -7,9 +7,9 @@ import ItemsGrid from '../../components/ItemsGrid';
 const Items = ({ classes, items }) => {
 	return (
 		<div className={classes.itemsPageBody}>
-			<p>
+			<div>
 				<ItemsGrid items={items} />
-			</p>
+			</div>
 		</div>
 	);
 };

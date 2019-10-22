@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
 
 const ItemCard = ({ classes, item }) => {
@@ -19,16 +19,16 @@ const ItemCard = ({ classes, item }) => {
 				<CardMedia className={classes.media} image={item.imageurl} title="Item image" />
 				<CardContent className={classes.cardContent}>
 					<Typography className={classes.itemowner} variant="body2" color="textSecondary" component="p">
-						<NavLink className={classes.itemownerDetails}>
+						<Link className={classes.itemownerDetails}>
 							<div className={classes.itemownerAvatar}>
 								<Gravatar className={classes.itemownerAvatarImg} email={item.itemowner.email} />
 							</div>
 
 							<div className={classes.iteownerFullName}>
-								{item.itemowner.fullname}
+								<div>{item.itemowner.fullname}</div>
 								<div className={classes.datePosted}>XX days ago</div>
 							</div>
-						</NavLink>
+						</Link>
 					</Typography>
 					<div className={classes.itemsDetails}>
 						<Typography gutterBottom variant="h5" component="h2">

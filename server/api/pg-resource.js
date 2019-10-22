@@ -11,7 +11,11 @@ module.exports = postgres => {
 			const newUserInsert = {
 				text   : `INSERT INTO users(fullname, email, password)
                VALUES ($1, $2, $3)`,
-				values : [ fullname, email, password ]
+				values : [
+					fullname,
+					email,
+					password
+				]
 			};
 			try {
 				const user = await postgres.query(newUserInsert);
@@ -32,7 +36,9 @@ module.exports = postgres => {
 				text   : `SELECT (fullname, password) 
               FROM users 
               WHERE users.email = $1`,
-				values : [ email ]
+				values : [
+					email
+				]
 			};
 			try {
 				const user = await postgres.query(findUserQuery);
@@ -47,7 +53,9 @@ module.exports = postgres => {
 			const findUserQuery = {
 				text   : `SELECT * FROM users u 
                 WHERE u.id = $1`,
-				values : [ id ]
+				values : [
+					id
+				]
 			};
 			try {
 				const user = await postgres.query(findUserQuery);
@@ -62,7 +70,11 @@ module.exports = postgres => {
 			const itemsBYOmitedUser = {
 				text   : `SELECT * FROM items
         WHERE itemowner != $1`,
-				values : idToOmit ? [ idToOmit ] : []
+				values : idToOmit
+					? [
+							idToOmit
+						]
+					: []
 			};
 
 			try {
@@ -77,7 +89,9 @@ module.exports = postgres => {
 			const itemsPerUser = {
 				text   : `SELECT * FROM items
         WHERE items.itemowner = $1;`,
-				values : [ id ]
+				values : [
+					id
+				]
 			};
 			try {
 				const items = await postgres.query(itemsPerUser);
@@ -90,14 +104,16 @@ module.exports = postgres => {
 		async getBorrowedItemsForUser (id) {
 			const ItemsBorrowedByUser = {
 				text   : `SELECT * FROM users
-        INNER JOIN items
-        ON items.borrower = users.id
-        WHERE users.id = $1`,
-				values : [ id ]
+         				JOIN items
+        				ON items.borrower = users.id
+        				WHERE users.id = $1`,
+				values : [
+					id
+				]
 			};
 			try {
 				const items = await postgres.query(ItemsBorrowedByUser);
-				return items.rows[0];
+				return items.rows;
 			} catch (e) {
 				throw 'Items not found';
 			}
@@ -131,7 +147,9 @@ module.exports = postgres => {
 		ON itemtags.tagid = tags.id
         WHERE itemtags.itemid = $1
          `,
-				values : [ id ]
+				values : [
+					id
+				]
 			};
 			try {
 				const tags = await postgres.query(tagsQuery);
@@ -140,23 +158,6 @@ module.exports = postgres => {
 				throw 'No tags for this item';
 			}
 		},
-		//done
-		// async getUserForItem (id) {
-		// 	const usersQuery = {
-		// 		text   : `SELECT * FROM users
-		// INNER JOIN items
-		// ON items.itemowner = users.id
-		// WHERE users.id = $1
-		//  `,
-		// 		values : [ id ]
-		// 	};
-		// 	try {
-		// 		const users = await postgres.query(usersQuery);
-		// 		return users.rows[0];
-		// 	} catch (e) {
-		// 		throw 'No tags for this item';
-		// 	}
-		// },
 		async saveNewItem ({ item, user }) {
 			/**
        *  @TODO: Adding a New Item
@@ -186,13 +187,18 @@ module.exports = postgres => {
 					try {
 						// Begin postgres transaction
 						client.query('BEGIN', async err => {
-							const { title, description, tags } = item;
+							const { title, description, tags, imageurl } = item;
 
 							// Generate new Item query - working
 							const itemQuery = {
-								text   : `INSERT INTO items(title, description, itemowner) 
-                      VALUES ($1, $2, $3) RETURNING id, title, description`,
-								values : [ title, description, user ]
+								text   : `INSERT INTO items(title, description, itemowner, imageurl) 
+                      VALUES ($1, $2, $3, $4) RETURNING id, title, description,imageurl`,
+								values : [
+									title,
+									description,
+									user,
+									imageurl
+								]
 							};
 
 							// Insert new Item - working
@@ -206,7 +212,9 @@ module.exports = postgres => {
 								itemTagsQuery = {
 									text   : `INSERT INTO itemtags(tagid, itemid) 
                              VALUES ($1,${itemid});`,
-									values : [ tag.id ]
+									values : [
+										tag.id
+									]
 								};
 								let newItemTag = postgres.query(itemTagsQuery);
 							});

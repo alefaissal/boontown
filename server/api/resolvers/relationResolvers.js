@@ -7,7 +7,7 @@ module.exports = {
 				const items = await pgResource.getItemsForUser(id);
 				return items;
 			} catch (e) {
-				throw 'Now items for this user';
+				throw 'No items for this user';
 			}
 		},
 		async borrowed ({ id }, args, { pgResource }, info) {
@@ -41,7 +41,7 @@ module.exports = {
 		},
 		async borrower (item, args, { pgResource }, info) {
 			try {
-				const userBorrower = await pgResource.getBorrowedItemsForUser(item.borrower);
+				const userBorrower = await pgResource.getUserById(item.borrower);
 				return userBorrower;
 			} catch (e) {
 				throw 'No user borrow this item';

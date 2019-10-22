@@ -67,6 +67,7 @@ module.exports = `
     title: String!
     description: String
     tags: [AssignedTag]!
+    imageurl: String
   }
 
   type Query {

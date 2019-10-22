@@ -5,10 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Icon from '@material-ui/core/Icon';
 import { NavLink } from 'react-router-dom';
+import styles from './styles';
+import { withStyles } from '@material-ui/core';
 
 const ITEM_HEIGHT = 48;
 
-export default function MenuBarIcon () {
+const MenuBarIcon = ({ classes }) => {
 	const [
 		anchorEl,
 		setAnchorEl
@@ -43,15 +45,17 @@ export default function MenuBarIcon () {
 			>
 				<NavLink to="/profile">
 					<MenuItem onClick={handleClose}>
-						<Icon>fingerprint</Icon> YOUR PROFILE
+						<Icon className={classes.iconMenuBar}>fingerprint</Icon> YOUR PROFILE
 					</MenuItem>
 				</NavLink>
-				<NavLink to="/logout">
+				<NavLink to="/welcome">
 					<MenuItem onClick={handleClose}>
-						<Icon>power_settings_new</Icon> LOGOUT
+						<Icon className={classes.iconMenuBar}>power_settings_new</Icon> LOGOUT
 					</MenuItem>
 				</NavLink>
 			</Menu>
 		</div>
 	);
-}
+};
+
+export default withStyles(styles)(MenuBarIcon);
