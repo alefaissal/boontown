@@ -1,8 +1,14 @@
-const { ApolloError } = require("apollo-server");
+const { ApolloError } = require('apollo-server');
 
 const queryResolvers = app => ({
-  async viewer(parent, args, { user }, info) {
-    /**
+	async viewer (parent, args, { user }, info) {
+		const fakeUser = {
+			id       : 5678,
+			fullname : 'Fake User',
+			bio      : 'Very fake user here form queries',
+			email    : 'fake@fake.com'
+		};
+		/**
      * @TODO: Authentication - Server
      *
      *  If you're here, you have successfully completed the sign-up and login resolvers
@@ -15,44 +21,40 @@ const queryResolvers = app => ({
      *  To provide information about the user's session to the app, return the user.
      *  If there is no user, the user has signed out, in which case user will be null.
      */
-    return null;
-  },
-  async user(parent, { id }, { pgResource }, info) {
-    try {
-      
-      const user = await pgResource.getUserById(id);
-      return user;
-    } catch (e) {
-      throw new ApolloError(e);
-    }
-  },
-  async users(parent, args, {pgResource}, info) {
-    try{
-      
-      const users = await pgResource.getUsers();
-      return users;
-    }catch(e){
-      throw new ApolloError(e);
-    }
-  },
-  async tags(parent, args, { pgResource }, info) {
-    try{
-      const tags = await pgResource.getTags();
-      return tags;
-    }
-    catch (e){
-      throw new ApolloError(e);
-    }
-  },
-  async items(parent, {filter}, {pgResource}, info){
-    try{
-      const items = await pgResource.getItems(filter);
-      return items;
-
-    }catch(e){
-      throw "No items not related to this user";
-    }
-}
+		return fakeUser;
+	},
+	async user (parent, { id }, { pgResource }, info) {
+		try {
+			const user = await pgResource.getUserById(id);
+			return user;
+		} catch (e) {
+			throw new ApolloError(e);
+		}
+	},
+	async users (parent, args, { pgResource }, info) {
+		try {
+			const users = await pgResource.getUsers();
+			return users;
+		} catch (e) {
+			throw new ApolloError(e);
+		}
+	},
+	async tags (parent, args, { pgResource }, info) {
+		try {
+			const tags = await pgResource.getTags();
+			return tags;
+		} catch (e) {
+			throw new ApolloError(e);
+		}
+	},
+	async items (parent, { filter }, { pgResource }, info) {
+		try {
+			const items = await pgResource.getItems(filter);
+			return items;
+		} catch (e) {
+			throw 'No items not related to this user';
+		}
+	}
 });
 
 module.exports = queryResolvers;

@@ -54,6 +54,17 @@ module.exports = gql`
 		imageurl: String
 	}
 
+	input LoginInput {
+		email: String!
+		password: String!
+	}
+
+	input SignUpInput {
+		fullname: String!
+		email: String!
+		password: String!
+	}
+
 	type Query {
 		viewer: User
 		user(id: ID!): User
@@ -63,9 +74,9 @@ module.exports = gql`
 	}
 
 	type Mutation {
-		signup: Boolean
-		login: Boolean
-		logout: Boolean
+		signup(user: SignUpInput): AuthPayload!
+		login(user: LoginInput): AuthPayload!
+		logout: Boolean!
 		addItem(item: NewItemInput!): Item
 	}
 `;
