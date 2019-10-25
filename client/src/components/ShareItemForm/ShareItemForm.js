@@ -4,7 +4,6 @@ import { Form, Field, FormSpy } from 'react-final-form';
 import styles from './styles';
 import { withStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { ItemPreviewContext } from '../../context/ItemPreviewProvider';
 import { Mutation } from 'react-apollo';
 import { ADD_ITEM_MUTATION } from '../../apollo/queries';

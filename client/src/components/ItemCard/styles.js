@@ -1,6 +1,6 @@
 const styles = theme => ({
 	card               : {
-		width          : '30vw',
+		width          : '28.5vw',
 		height         : '65vh',
 		display        : 'flex',
 		justifyContent : 'space-between',

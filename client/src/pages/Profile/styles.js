@@ -53,10 +53,11 @@ const styles = theme => ({
 	sharedItemsTitle   : {
 		fontSize   : '3em',
 		color      : '#F9A825',
-		background : 'black'
+		background : 'black',
+		margin     : 0
 	},
 	itemsGridContainer : {
-		marginLeft : '-3.5vw',
+		marginLeft : '-3vw',
 		background : 'black'
 	},
 	profileContainer   : {

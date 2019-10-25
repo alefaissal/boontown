@@ -10,13 +10,14 @@ module.exports = postgres => {
 		async createUser ({ fullname, email, password }) {
 			const newUserInsert = {
 				text   : `INSERT INTO users(fullname, email, password)
-               VALUES ($1, $2, $3)`,
+               VALUES ($1, $2, $3) RETURNING *`,
 				values : [
 					fullname,
 					email,
 					password
 				]
 			};
+
 			try {
 				const user = await postgres.query(newUserInsert);
 				return user.rows[0];
@@ -33,7 +34,7 @@ module.exports = postgres => {
 		},
 		async getUserAndPasswordForVerification (email) {
 			const findUserQuery = {
-				text   : `SELECT (fullname, password) 
+				text   : `SELECT *
               FROM users 
               WHERE users.email = $1`,
 				values : [
@@ -159,30 +160,7 @@ module.exports = postgres => {
 			}
 		},
 		async saveNewItem ({ item, user }) {
-			/**
-       *  @TODO: Adding a New Item
-       *
-       *  Adding a new Item requires 2 separate INSERT statements.
-       *
-       *  All of the INSERT statements must:
-       *  1) Proceed in a specific order.
-       *  2) Succeed for the new Item to be considered added
-       *  3) If any of the INSERT queries fail, any successful INSERT
-       *     queries should be 'rolled back' to avoid 'orphan' data in the database.
-       *
-       *  To achieve #3 we'll use something called a Postgres Transaction!
-       *  The code for the transaction has been provided for you, along with
-       *  helpful comments to help you get started.
-       *
-       *  Read the method and the comments carefully before you begin.
-       */
-
 			return new Promise((resolve, reject) => {
-				/**
-         * Begin transaction by opening a long-lived connection
-         * to a client from the client pool.
-         * - Read about transactions here: https://node-postgres.com/features/transactions
-         */
 				postgres.connect((err, client, done) => {
 					try {
 						// Begin postgres transaction

@@ -9,8 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import Gravatar from 'react-gravatar';
+import { Box } from '@material-ui/core';
 
 const ItemCard = ({ classes, item }) => {
 	return (
@@ -18,8 +18,8 @@ const ItemCard = ({ classes, item }) => {
 			<CardActionArea>
 				<CardMedia className={classes.media} image={item.imageurl} title="Item image" />
 				<CardContent className={classes.cardContent}>
-					<Typography className={classes.itemowner} variant="body2" color="textSecondary" component="p">
-						<Link className={classes.itemownerDetails}>
+					<Typography className={classes.itemowner} variant="body2" color="textSecondary" component="div">
+						<Box component="span" className={classes.itemownerDetails}>
 							<div className={classes.itemownerAvatar}>
 								<Gravatar className={classes.itemownerAvatarImg} email={item.itemowner.email} />
 							</div>
@@ -28,7 +28,7 @@ const ItemCard = ({ classes, item }) => {
 								<div>{item.itemowner.fullname}</div>
 								<div className={classes.datePosted}>XX days ago</div>
 							</div>
-						</Link>
+						</Box>
 					</Typography>
 					<div className={classes.itemsDetails}>
 						<Typography gutterBottom variant="h5" component="h2">
