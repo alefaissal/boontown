@@ -138,6 +138,11 @@ export default compose(
 		},
 		name    : 'login'
 	}),
-	graphql(SIGNUP_MUTATION, { name: 'signup' }),
+	graphql(SIGNUP_MUTATION, {
+		options : {
+			refetchQueries : refetchQueries
+		},
+		name    : 'signup'
+	}),
 	withStyles(styles)
 )(AccountForm);

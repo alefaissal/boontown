@@ -4,14 +4,7 @@ const { ApolloError } = require('apollo-server');
 const queryResolvers = app => ({
 	async viewer (parent, args, context) {
 		console.log(context.user);
-		const fakeUser = {
-			id       : 5678,
-			fullname : 'Fake User',
-			bio      : 'Very fake user here from queries',
-			email    : 'fake@fake.com'
-		};
-		// return fakeUser;
-		//TODO errase fake user and change to context.user
+
 		return context.user;
 	},
 	async user (parent, { id }, { pgResource }, info) {
