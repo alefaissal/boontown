@@ -170,7 +170,7 @@ module.exports = postgres => {
 							// Generate new Item query - working
 							const itemQuery = {
 								text   : `INSERT INTO items(title, description, itemowner, imageurl) 
-                      VALUES ($1, $2, $3, $4) RETURNING id, title, description,imageurl`,
+                      VALUES ($1, $2, $3, $4) RETURNING *`,
 								values : [
 									title,
 									description,

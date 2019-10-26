@@ -61,8 +61,8 @@ const styles = theme => ({
 		background : 'black'
 	},
 	profileContainer   : {
-		background : 'black'
-		// marginTop  : '-10vh'
+		background : 'black',
+		minHeight  : '100vh'
 	}
 });
 

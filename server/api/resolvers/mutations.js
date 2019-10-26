@@ -83,7 +83,7 @@ const mutationResolvers = app => ({
 
 		const newItem = await context.pgResource.saveNewItem({
 			item : args.item,
-			user
+			user : user.id
 		});
 		return newItem;
 	}
