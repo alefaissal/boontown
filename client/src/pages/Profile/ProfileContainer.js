@@ -4,19 +4,27 @@ import Profile from './Profile';
 import { Query } from 'react-apollo';
 import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
 import Loading from '../../components/Loading';
+import { ViewerContext } from '../../context/ViewerProvider';
 
 class ProfileContainer extends Component {
 	render () {
 		return (
-			<Query query={ALL_USER_ITEMS_QUERY} variables={{ id: 1 }}>
-				{({ loading, error, data }) => {
-					if (loading) return <Loading />;
-					if (error) return `Error: ${error}`;
-					if (data) {
-						return <Profile user={data.user} />;
-					}
+			<ViewerContext.Consumer>
+				{({ viewer }) => {
+					return (
+						//TODO change to: id: viewer.id
+						<Query query={ALL_USER_ITEMS_QUERY} variables={{ id: 2 }}>
+							{({ loading, error, data }) => {
+								if (loading) return <Loading />;
+								if (error) return `Error: ${error}`;
+								if (data) {
+									return <Profile user={data.user} />;
+								}
+							}}
+						</Query>
+					);
 				}}
-			</Query>
+			</ViewerContext.Consumer>
 		);
 	}
 }

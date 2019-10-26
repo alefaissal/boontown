@@ -27,7 +27,7 @@ class ShareItemForm extends Component {
 	}
 
 	applyTags = (tags, allTags) => {
-		console.log(tags);
+		// console.log(tags);
 		return tags.map(tag => {
 			const updatedTag = { title: tag };
 			allTags.filter(t => {
@@ -54,7 +54,7 @@ class ShareItemForm extends Component {
 			};
 			await addItem({ variables: { item: newItem } });
 		} catch (e) {
-			throw 'Could not add the item, please try again with at least a Title and a Description';
+			throw e;
 		}
 	};
 
@@ -83,7 +83,7 @@ class ShareItemForm extends Component {
 										<FormSpy
 											subscription={{ values: true }}
 											onChange={({ values }) => {
-												console.log(values);
+												// console.log(values);
 												if (values) {
 													this.dispatchUpdate(values, tags, updatePreview);
 												} else {

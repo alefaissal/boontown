@@ -49,10 +49,8 @@ const mutationResolvers = app => ({
 	},
 
 	async login (parent, context, { pgResource, req }) {
-		// console.log(context.user.email);
 		try {
 			const user = await pgResource.getUserAndPasswordForVerification(context.user.email);
-			console.log(user);
 			if (!user) throw 'User was not found.';
 
 			const valid = await bcrypt.compare(context.user.password, user.password);

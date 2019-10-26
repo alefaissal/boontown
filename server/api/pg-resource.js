@@ -52,8 +52,8 @@ module.exports = postgres => {
 		//done
 		async getUserById (id) {
 			const findUserQuery = {
-				text   : `SELECT * FROM users u 
-                WHERE u.id = $1`,
+				text   : `SELECT * FROM users  
+                WHERE id = $1`,
 				values : [
 					id
 				]
