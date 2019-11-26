@@ -18,7 +18,6 @@ const refetchQueries = [
 
 const MenuBarIcon = props => {
 	const { classes } = props;
-	// console.log(props);
 	const [
 		anchorEl,
 		setAnchorEl
@@ -64,7 +63,6 @@ const MenuBarIcon = props => {
 									try {
 										await logout();
 									} catch (e) {
-										console.log(e);
 										throw e;
 									}
 								}}

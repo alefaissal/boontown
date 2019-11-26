@@ -8,7 +8,6 @@ const ShareItemPreview = ({ classes }) => {
 	return (
 		<ItemPreviewContext.Consumer>
 			{({ state }) => {
-				console.log(state.item);
 				return (
 					<div className={classes.previewContainer}>
 						<ItemCard item={state.item} />
