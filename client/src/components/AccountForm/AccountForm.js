@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { Form, Field } from 'react-final-form';
 import { LOGIN_MUTATION, SIGNUP_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
-// import validate from './helpers/validation';
+import validate from './helpers/validation';
 
 import styles from './styles';
 // import { resetCaches } from 'graphql-tag';
@@ -21,17 +21,17 @@ class AccountForm extends Component {
 			formToggle : true,
 			error      : null
 		};
+		this.validate = validate;
 	}
 
 	render () {
-		// console.log(this.props);
 		const { classes, login, signup } = this.props;
 
 		return (
 			<Form
 				onSubmit={async values => {
-					console.log(values);
 					try {
+						this.validate(values);
 						this.state.formToggle
 							? await login({ variables: { user: values } })
 							: await signup({ variables: { user: values } });

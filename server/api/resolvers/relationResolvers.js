@@ -25,7 +25,6 @@ module.exports = {
 			try {
 				const owner = await pgResource.getUserById(item.itemowner);
 
-				// console.log(owner)
 				return owner;
 			} catch (e) {
 				throw 'Now owner for this item';

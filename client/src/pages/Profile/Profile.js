@@ -5,7 +5,6 @@ import ItemsGrid from '../../components/ItemsGrid';
 import Gravatar from 'react-gravatar';
 
 const Profile = ({ classes, user }) => {
-	console.log(user);
 	return (
 		<div className={classes.profileContainer}>
 			<div className={classes.marginTop} />

@@ -13,6 +13,7 @@ import Gravatar from 'react-gravatar';
 import { Box } from '@material-ui/core';
 
 const ItemCard = ({ classes, item }) => {
+	const date = new Date().toDateString();
 	return (
 		<Card className={classes.card}>
 			<CardActionArea>
@@ -26,7 +27,7 @@ const ItemCard = ({ classes, item }) => {
 
 							<div className={classes.iteownerFullName}>
 								<div>{item.itemowner.fullname}</div>
-								<div className={classes.datePosted}>XX days ago</div>
+								<div className={classes.datePosted}>{date}</div>
 							</div>
 						</Box>
 					</Typography>
