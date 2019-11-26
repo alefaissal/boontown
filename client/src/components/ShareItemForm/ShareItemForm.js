@@ -77,13 +77,14 @@ class ShareItemForm extends Component {
                   resetPreview();
                 }}
                 validate={validate}
-                render={({ handleSubmit, reset }) => (
+                render={({ handleSubmit, form }) => (
                   <form
                     className={classes.shareFormContainer}
                     onSubmit={e => {
                       e.preventDefault();
                       handleSubmit();
-                      reset();
+                      form.reset();
+                      resetPreview();
                     }}
                   >
                     <FormSpy
