@@ -14,6 +14,7 @@ import {
 } from "../../apollo/queries";
 import { graphql, compose } from "react-apollo";
 import validate from "./helpers/validation";
+import PropTypes from "prop-types";
 
 import styles from "./styles";
 
@@ -140,6 +141,11 @@ class AccountForm extends Component {
     );
   }
 }
+
+AccountForm.propTypes = {
+  LOGIN_MUTATION: PropTypes.func.isRequired,
+  SIGNUP_MUTATION: PropTypes.func.isRequired
+};
 
 const refetchQueries = [{ query: VIEWER_QUERY }];
 

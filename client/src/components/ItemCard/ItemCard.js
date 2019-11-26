@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Gravatar from "react-gravatar";
 import { Box } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 const ItemCard = ({ classes, item }) => {
   const date = new Date().toDateString();
@@ -70,6 +71,27 @@ const ItemCard = ({ classes, item }) => {
       </CardActions>
     </Card>
   );
+};
+
+ItemCard.propTypes = {
+  itemInfo: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    imageurl: PropTypes.string,
+    tags: PropTypes.array,
+    itemowner: PropTypes.object,
+    borrower: PropTypes.object,
+    created: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  }),
+
+  viewer: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    fullname: PropTypes.string.isRequired,
+    userimageurl: PropTypes.string,
+    bio: PropTypes.string
+  })
 };
 
 ItemCard.defaultProps = {
