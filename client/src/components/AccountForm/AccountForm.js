@@ -74,10 +74,10 @@ class AccountForm extends Component {
                 {({ input, meta }) => (
                   <Input
                     id="email"
-                    type="text"
                     inputProps={{
                       ...input,
-                      autoComplete: "off"
+                      autoComplete: "off",
+                      type: "email"
                     }}
                   />
                 )}
@@ -89,10 +89,10 @@ class AccountForm extends Component {
                 {({ input, meta }) => (
                   <Input
                     id="password"
-                    type="password"
                     inputProps={{
                       autoComplete: "off",
-                      ...input
+                      ...input,
+                      type: "password"
                     }}
                   />
                 )}

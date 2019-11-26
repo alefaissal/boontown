@@ -1,6 +1,7 @@
 import styles from "./styles";
 import React from "react";
 import Card from "@material-ui/core/Card";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -16,7 +17,7 @@ const ItemCard = ({ classes, item }) => {
   const date = new Date().toDateString();
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea component={Link} to={`/profile/${item.itemowner.id}`}>
         <CardMedia
           className={classes.media}
           image={item.imageurl}
